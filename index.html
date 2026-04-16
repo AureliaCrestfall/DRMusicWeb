@@ -16,14 +16,21 @@
 
     <h1>Music Records (GET)</h1>
     <div id="app">
-        <h2>Get All Records</h2>
-        <button id="getAllButton" v-on:click="getAllRecords" class="btn btn-primary">Get all records</button>
+    <h2>get records</h2>
+
+          <button id="getAllButton" v-on:click="getAllRecords" class="btn btn-primary">Get all records</button>
+         <input placeholder="Title" type="text" v-model="title" v-on:keyup.enter="filterByTitle(title)">
+        <button v-on:click="filterByTitle(title)" class="btn btn-primary">
+            Filter
+        </button>
+
         <br />
         <ul id="recordlist" v-if="records.length">
             <li v-for="record in records" :key="record.id">
                 {{record.id}} : {{record.title }} {{ record.artist}} {{ record.duration}} {{ record.publicationYear}}
             </li>
         </ul>
+       
         <div v-else>No Records</div>
 
     

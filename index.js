@@ -4,13 +4,15 @@ Vue.createApp({
     data() {
         return {
             records: [],
+            allrecords:[],
             singleRecord: null,
             deleteId: null,
             deleteMessage: "",
             addData: { title: "", artist: "", duration: null, publicationYear: "" },
             addMessage: "",
             updateData: { id: null, title: "", artist: "", duration: null, publicationYear: "" },
-            updateMessage: ""
+            updateMessage: "",
+            artist: null
         }
     },
     methods: {
@@ -21,7 +23,8 @@ Vue.createApp({
     async getRecords(url) {
     try {
         const response = await axios.get(url)
-        this.records = await response.data
+        this.allrecords = await response.data
+
     } catch (ex) {
         alert(ex.message)
     }
@@ -40,6 +43,12 @@ Vue.createApp({
                 alert(ex.message)
             }
         },
+        filterByTitle(artist) {
+            console.log("Title:" + artist + ":")
+            console.log("All books " + this.allrecords)
+            this.records = this.allrecords.filter(b => b.artist.includes(artist))
+            console.log("filtered Books: " + this.records)
+        }
     
      
      
