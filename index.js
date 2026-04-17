@@ -1,6 +1,6 @@
-authUrl = "http://localhost:5137/API/Auth/Login/";
+authUrl = "https://drmusic20260417115327-begtgnhmgagaa0ef.swedencentral-01.azurewebsites.net/api/Auth/Login/";
 
-const baseUrl = "http://localhost:5137/API/Music"
+const baseUrl = "https://drmusic20260417115327-begtgnhmgagaa0ef.swedencentral-01.azurewebsites.net/api/music"
 
 
 Vue.createApp({
