@@ -24,14 +24,14 @@ Vue.createApp({
         }
     },
     methods: {
-        login() {
+       async login() {
             axios.post(authUrl, this.auth)
                 .then(response => {
                     this.jwtToken = response.data.token;
                     this.role = response.data.role;
                     this.loggedIn = true;
                     this.authMessage = "Authentication successful";
-                    this.getRecords(); // Fetch records immediately after successful login
+                    this.getRecords(baseUrl); // Fetch records immediately after successful login
                 }).catch(ex => {
                     this.authMessage = "Authentication failed - " + ex.message;
                 });
@@ -46,7 +46,7 @@ Vue.createApp({
             this.authMessage = "Logged out successfully";
         },
 
-        getAllRecords() {
+       async  getAllRecords() {
             this.getRecords(baseUrl)
         },
 
@@ -65,6 +65,49 @@ Vue.createApp({
             console.log("All records " + this.records)
             this.allrecords = this.records.filter(b => b.title.includes(title))
             console.log("filtered records: " + this.records)
+        },
+         addRecord() {
+            axios.post(baseUrl, this.addData, {
+                headers: { // TODO - move to interceptor
+                    'Authorization': 'Bearer ' + this.jwtToken
+                }
+            })
+                .then(response => {
+                    this.records.push(response.data);
+                    this.message = "record added successfully";
+                    this.addData = { title: "", artist: "", duration: null, publicationYear: "" }; // Reset the form
+                })
+                .catch(ex => {
+                    this.message = "Failed to add record - " + ex.message;
+                });
+        }, deleteRecord() {
+            axios.delete(baseUrl, this.deleteId, {
+                headers: { // TODO - move to interceptor
+                    'Authorization': 'Bearer ' + this.jwtToken
+                }
+            })
+                .then(response => {
+                    this.records.push(response.data);
+                    this.message = "record added successfully";
+                    this.deleteId = null; // Reset the form
+                })
+                .catch(ex => {
+                    this.message = "Failed to add record - " + ex.message;
+                });
+        }, updateDataRecord() {
+            axios.put(baseUrl, this.updateData, {
+                headers: { // TODO - move to interceptor
+                    'Authorization': 'Bearer ' + this.jwtToken
+                }
+            })
+                .then(response => {
+                    this.records.push(response.data);
+                    this.message = "record added successfully";
+                    this.updateData = { id: null, title: "", artist: "", duration: null, publicationYear: "" }; // Reset the form
+                })
+                .catch(ex => {
+                    this.message = "Failed to add record - " + ex.message;
+                });
         }
 
     }

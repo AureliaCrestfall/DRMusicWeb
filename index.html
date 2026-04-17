@@ -75,15 +75,33 @@
                 <p>No records yet</p>
             </div>
             <p v-if="message">{{ message }}</p>
+       
+        </div>
+     <div v-if="role !='null'">
+            <input v-model="addData.title" placeholder="New Record title" type="text">
+            <input v-model="addData.artist" placeholder="New record artist" type="text">
+            <input v-model.number="addData.duration" placeholder="New record duration" type="number">
+            <input v-model.datetime="addData.publicationYear" placeholder="New record publicationYear" type="datetime">
+            <button @click="addRecord()">Add records</button>
         </div>
 
-        <div v-if="role=='Admin'">
-            <input v-model="newRecord.title" placeholder="New Record title" type="text">
-            <input v-model="newRecord.artist" placeholder="New record artist" type="number">
-            <button @click="addRecords()">Add records</button>
+
+          <div v-if="role !='null'">
+            <input v-model.number="updateData.id" placeholder="update-- Record id" type="number">
+            <input v-model="updateData.title" placeholder="update-- Record title" type="text">
+            <input v-model="updateData.artist" placeholder="update-- record artist" type="text">
+            <input v-model.number="updateData.duration" placeholder="update-- record duration" type="number">
+            <input v-model.datetime="updateData.publicationYear" placeholder="update-- record publicationYear" type="datetime">
+            <button @click="updateRecord()">update records</button>
         </div>
 
-        <!-- TODO delete, update-->
+
+
+          <div v-if="role !='null'">
+            <input v-model.number="deleteId" placeholder="delete Record id" type="number">
+            <button @click="deleteRecord()">delete records</button>
+        </div>
+
 
     </div>
 
