@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/4361110a-36d9-472d-8078-905212d64f1f/resourceGroups/3rdSem/providers/Microsoft.Web/sites/DRMusic20260417123557",
+    "appService.deploySubpath": "."
+}
